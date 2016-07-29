@@ -129,18 +129,27 @@ cat3.products.create!({
   price: 2_483.75
 })
 
-product.review.create!({
+User.create!({
+  name: "Britni",
+  email: "britni@gmail.com",
+  password: "britni"
+  })
+
+User.create!({
+  name: "Esther",
+  email: "esther@gmail.com",
+  password: "esther"
+  })
+
+product.reviews.create!({
+  user_id: 1,
   description: "So itchy. It is functional, but not a fan",
   rating: 2
   })
 
-product.review.create!({
+product.reviews.create!({
+  user_id: 2,
   rating: 4
-  })
-
-product.review.create!({
-  description: "I had to buy a tee-shirt..",
-  rating: 5
   })
 
 puts "DONE!"
