@@ -54,17 +54,14 @@ class OrdersController < ApplicationController
     end
     order.save!
     order
+    send_email
+
   end
 
-  # returns total in cents not dollars (stripe uses cents as well)
-  # def cart_total
-  #   total = 0
-  #   cart.each do |product_id, details|
-  #     if p = Product.find_by(id: product_id)
-  #       total += p.price_cents * details['quantity'].to_i
-  #     end
-  #   end
-  #   total
-  # end
+  def send_email
+    User.find_each do |user|
+      UserMailer.order_email(user).deliver_now
+    end
+  end
 
 end
