@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
     @product = Product.find params[:id]
     @reviews = @product.reviews
     @review = Review.new
+    @reviews.order(created_at: :desc)
   end
 
 end

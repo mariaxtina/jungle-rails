@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
 
-before_filter :authorize, :only => [:edit, :delete]
+before_filter :authorize, :only => [ :delete]
 
   def create
     @product = Product.find params[:product_id]
@@ -16,9 +16,17 @@ before_filter :authorize, :only => [:edit, :delete]
     end
   end
 
+  def destroy
+    @review = Review.find params[:id]
+    @review.destroy
+    @product = Product.find params[:product_id]
+    redirect_to [@product], notice: 'Category deleted!'
+  end
+
+
  private
 
   def review_params
-   params.require(:review).permit(:rating, :description)
+   params.require(:review).permit(:rating, :description, :product_id)
   end
 end
