@@ -41,10 +41,10 @@ RSpec.describe User, type: :model do
   end
   describe '.authenticate_with_credentials' do
     it 'works when login email and password match db email and password' do
-      User.create!(name: "Xtina", email: "hi@gmail.com", password: "hi", password_confirmation: "hi")
+      user = User.create!(name: "Xtina", email: "hi@gmail.com", password: "hi", password_confirmation: "hi")
       email = "hi@gmail.com"
       password = "hi"
-      expect(User.authenticate_with_credentials(email, password)).to eql true
+      expect(User.authenticate_with_credentials(email, password)).to eql user
     end
     it 'fails when login email does not match db email' do
       User.create!(name: "Xtina", email: "hi@gmail.com", password: "hi", password_confirmation: "hi")
@@ -53,16 +53,16 @@ RSpec.describe User, type: :model do
       expect(User.authenticate_with_credentials(email, password)).to eql false
     end
     it 'works when login email is valid and includes spaces' do
-      User.create!(name: "Xtina", email: "hi@gmail.com", password: "hi", password_confirmation: "hi")
+      user = User.create!(name: "Xtina", email: "hi@gmail.com", password: "hi", password_confirmation: "hi")
       email = " hi@gmail.com "
       password = "hi"
-      expect(User.authenticate_with_credentials(email, password)).to eql true
+      expect(User.authenticate_with_credentials(email, password)).to eql user
     end
     it 'fails when login email does not match db email' do
-      User.create!(name: "Xtina", email: "hi@gmail.com", password: "hi", password_confirmation: "hi")
+      user = User.create!(name: "Xtina", email: "hi@gmail.com", password: "hi", password_confirmation: "hi")
       email = "hi@gmail.COM"
       password = "hi"
-      expect(User.authenticate_with_credentials(email, password)).to eql true
+      expect(User.authenticate_with_credentials(email, password)).to eql user
     end
     it 'fails when login email password does not match db password' do
       User.create!(name: "Xtina", email: "hi@gmail.com", password: "hi", password_confirmation: "hi")

@@ -41,7 +41,8 @@ gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'byebug',  '9.0.0', platform: :mri
+  gem 'sqlite3', '1.3.11'
   gem 'quiet_assets'
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.5'
@@ -60,4 +61,5 @@ end
 group :production do
   gem 'newrelic_rpm'
   gem 'rails_12factor'
+  gem 'pg', '0.18.4'
 end
